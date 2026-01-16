@@ -10,6 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+      ANDROID_HOME: /usr/local/lib/android/sdk
+
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
@@ -20,13 +24,19 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Configurar Android SDK
+      - name: Instalar Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Aceitar licenças do SDK
+      - name: Instalar componentes do SDK
+        run: |
+          sdkmanager "platform-tools" \
+                     "platforms;android-34" \
+                     "build-tools;34.0.0"
+
+      - name: Aceitar licenças do Android SDK
         run: yes | sdkmanager --licenses
 
-      - name: Configurar Gradle 8.6
+      - name: Configurar Gradle 8.6 (sem wrapper)
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: 8.6
