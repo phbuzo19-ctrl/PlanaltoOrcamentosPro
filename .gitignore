@@ -1,18 +1,5 @@
-# Gradle
 .gradle/
 build/
-
-# Local Gradle
-gradle-*/
-
-# Android
 local.properties
-*.apk
-*.aab
-
-# IDE
-.idea/
-*.iml
-
-# OS
-.DS_Store
+gradle-*
+*.zip
