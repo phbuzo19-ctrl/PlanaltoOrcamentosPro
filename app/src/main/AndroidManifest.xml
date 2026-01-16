@@ -1,19 +1,22 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="br.com.planalto.orcamentos">
 
     <application
-        android:label="Planalto Orçamentos"
         android:allowBackup="true"
+        android:label="Planalto Orçamentos"
+        android:theme="@style/Theme.PlanaltoOrcamentosPro"
         android:supportsRtl="true">
 
         <activity
             android:name=".MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
 
+        </activity>
     </application>
 
 </manifest>
