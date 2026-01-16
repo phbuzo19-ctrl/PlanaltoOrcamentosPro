@@ -1,4 +1,4 @@
-name: Android CI (Sem Cache)
+name: Android CI - APK Instalável
 
 on:
   push:
@@ -21,11 +21,25 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Build Debug APK
+      - name: Build APK Debug
         run: ./gradlew assembleDebug
 
-      - name: Upload APK
+      - name: Criar pasta instalável
+        run: |
+          mkdir PlanaltoOrcamentosPro-APK
+          cp app/build/outputs/apk/debug/app-debug.apk PlanaltoOrcamentosPro-APK/
+
+          echo "Planalto Orçamentos Pro" > PlanaltoOrcamentosPro-APK/LEIA-ME.txt
+          echo "1) Ative 'Fontes desconhecidas'" >> PlanaltoOrcamentosPro-APK/LEIA-ME.txt
+          echo "2) Clique em app-debug.apk" >> PlanaltoOrcamentosPro-APK/LEIA-ME.txt
+          echo "3) Instale normalmente" >> PlanaltoOrcamentosPro-APK/LEIA-ME.txt
+
+          echo "App: Planalto Orçamentos Pro" > PlanaltoOrcamentosPro-APK/info.txt
+          echo "Versão: 1.0" >> PlanaltoOrcamentosPro-APK/info.txt
+          echo "Build: GitHub Actions" >> PlanaltoOrcamentosPro-APK/info.txt
+
+      - name: Upload pasta final
         uses: actions/upload-artifact@v4
         with:
-          name: app-debug
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: PlanaltoOrcamentosPro-Instalavel
+          path: PlanaltoOrcamentosPro-APK
